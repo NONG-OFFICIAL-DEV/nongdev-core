@@ -1,0 +1,35 @@
+{
+  "name": "@nongdev/core",
+  "version": "1.0.0",
+  "description": "Shared utilities, API services and helpers",
+  "private": false,
+  "main": "index.js",
+  "files": [
+    "api",
+    "utils",
+    "echo.js",
+    "http.js",
+    "index.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NONG-OFFICIAL-DEV/nongdev-core.git"
+  },
+  "keywords": [
+    "core",
+    "shared"
+  ],
+  "peerDependencies": {
+    "axios": "^1.0.0",
+    "laravel-echo": "^1.0.0",
+    "pusher-js": "^8.0.0"
+  },
+  "author": "nongdev",
+  "license": "ISC"
+}
