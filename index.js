@@ -1,9 +1,7 @@
 // API
-export { orderApi }   from './api/order'
 export { menuApi }    from './api/menu'
 export { tableApi }   from './api/table'
 export { authApi }    from './api/auth'
-export { paymentApi } from './api/payment'
 
 // Utils
 export { formatCurrency, formatNumber }       from './utils/currency'
