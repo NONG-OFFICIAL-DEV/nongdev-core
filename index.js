@@ -4,7 +4,7 @@ export { tableApi }   from './api/table'
 export { authApi }    from './api/auth'
 
 // Utils
-export { formatCurrency, formatNumber }       from './utils/currency'
+export { formatCurrency, formatCurrencyNoSymbol,formatKHR }       from './utils/currency'
 export {
   formatDate,
   formatDateTime,
