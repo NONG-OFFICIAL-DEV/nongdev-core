@@ -1,6 +1,6 @@
 {
   "name": "@nong-official-dev/core",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Shared utilities, API services and helpers",
   "private": false,
   "main": "index.js",
