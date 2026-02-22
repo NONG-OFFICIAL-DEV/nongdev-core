@@ -5,7 +5,15 @@ export { authApi }    from './api/auth'
 
 // Utils
 export { formatCurrency, formatNumber }       from './utils/currency'
-export { formatTimeAgo, formatTime, formatDate } from './utils/date'
+export {
+  formatDate,
+  formatDateTime,
+  formatDateText,
+  formatLocalDate,
+  formatTimeAgo,
+  addDays,
+} from './utils/date'
+
 export { calcTotal, calcItemCount, ORDER_STATUS, KITCHEN_STATUS } from './utils/order'
 
 // Echo
