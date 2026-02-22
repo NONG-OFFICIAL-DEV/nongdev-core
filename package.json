@@ -1,5 +1,5 @@
 {
-  "name": "@nong-phloeut/core",
+  "name": "@nong-official-dev/core",
   "version": "1.0.0",
   "description": "Shared utilities, API services and helpers",
   "private": false,
@@ -30,6 +30,6 @@
     "laravel-echo": "^1.0.0",
     "pusher-js": "^8.0.0"
   },
-  "author": "nong-phloeut",
+  "author": "nong-official-dev",
   "license": "ISC"
 }

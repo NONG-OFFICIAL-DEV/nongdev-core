@@ -1,9 +1,9 @@
-# @nong-phloeut/core
+# @nong-official-dev/core
 
 > Shared utilities, API services, WebSocket helpers and constants — reusable across any project.
 
-[![npm](https://img.shields.io/badge/npm-@nong-phloeut%2Fcore-blue)](https://github.com/nong-phloeut/nong-phloeut-core)
-[![version](https://img.shields.io/badge/version-1.0.0-green)](https://github.com/nong-phloeut/nong-phloeut-core)
+[![npm](https://img.shields.io/badge/npm-@nong-official-dev%2Fcore-blue)](https://github.com/nong-official-dev/nong-official-dev-core)
+[![version](https://img.shields.io/badge/version-1.0.0-green)](https://github.com/nong-official-dev/nong-official-dev-core)
 [![license](https://img.shields.io/badge/license-ISC-lightgrey)](LICENSE)
 
 ---
@@ -36,14 +36,14 @@
 ### Step 1 — Add `.npmrc` to your project root
 
 ```
-@nong-phloeut:registry=https://npm.pkg.github.com
+@nong-official-dev:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
 ```
 
 ### Step 2 — Install
 
 ```bash
-npm install @nong-phloeut/core
+npm install @nong-official-dev/core
 ```
 
 ### Step 3 — Add peer dependencies
@@ -86,7 +86,7 @@ npm publish
 Then update in each app:
 
 ```bash
-npm update @nong-phloeut/core
+npm update @nong-official-dev/core
 ```
 
 ---
@@ -94,7 +94,7 @@ npm update @nong-phloeut/core
 ## Project Structure
 
 ```
-nong-phloeut-core/
+nong-official-dev-core/
   api/
     order.js       ← order endpoints
     menu.js        ← menu endpoints
@@ -117,15 +117,15 @@ nong-phloeut-core/
 
 ## Used In
 
-- `@nong-phloeut/pos` — POS terminal app
-- `@nong-phloeut/kitchen` — Kitchen display app
-- `@nong-phloeut/admin` — Management dashboard
+- `@nong-official-dev/pos` — POS terminal app
+- `@nong-official-dev/kitchen` — Kitchen display app
+- `@nong-official-dev/admin` — Management dashboard
 
 ---
 
 ## Author
 
-**nong-phloeut** — [github.com/nong-phloeut](https://github.com/nong-phloeut)
+**nong-official-dev** — [github.com/nong-official-dev](https://github.com/nong-official-dev)
 
 ---
 
