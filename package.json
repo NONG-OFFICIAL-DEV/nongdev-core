@@ -9,7 +9,9 @@
     "utils",
     "echo.js",
     "http.js",
-    "index.js"
+    "index.js",
+    "plugins",
+    "composables"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
