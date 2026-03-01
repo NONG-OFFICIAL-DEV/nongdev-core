@@ -1,6 +1,5 @@
-import { reactive } from "vue";
-
-export const alertState = reactive({ alerts: [] });
+import { alertState } from "../../state.js";
+export { alertState };
 
 export const notifPlugin = {
   install(app) {

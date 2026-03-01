@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { alertState } from "./index.js";
+import { alertState } from "../../state.js"; // ← same single source
 
 export default {
   name: "NotificationAlert",

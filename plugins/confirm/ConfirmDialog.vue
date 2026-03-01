@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { confirmState } from './index.js'
+import { confirmState } from '../../state.js'  // ← same single source
 
 export default {
   name: 'ConfirmDialog',

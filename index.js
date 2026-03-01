@@ -3,13 +3,15 @@ export { menuApi }    from './api/menu'
 export { tableApi }   from './api/table'
 export { authApi }    from './api/auth'
 
-// Plugins
-export { confirmPlugin } from './plugins/confirm/index'
-export { notifPlugin }   from './plugins/notif/index'
+// state
+export { confirmState, alertState } from './state.js'
 
-// Composables
-export { useConfirm }    from './composables/useAppUtils'
-export { useNotif }      from './composables/useAppUtils'
+// plugins
+export { confirmPlugin } from './plugins/confirm/index.js'
+export { notifPlugin }   from './plugins/notif/index.js'
+
+// composables
+export { useConfirm, useNotif } from './composables/useAppUtils.js'
 
 // ... rest of your exports
 // Utils

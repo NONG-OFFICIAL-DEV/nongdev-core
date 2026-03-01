@@ -1,14 +1,5 @@
-import { reactive } from "vue";
-
-// Shared state outside of plugin — accessible by both component and composable
-export const confirmState = reactive({
-  dialog: false,
-  title: null,
-  message: null,
-  options: { type: "error", width: 290 },
-  agreeCallback: () => {},
-  cancelCallback: () => {},
-});
+import { confirmState } from "../../state.js";
+export { confirmState };
 
 export const confirmPlugin = {
   install(app) {
