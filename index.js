@@ -3,6 +3,15 @@ export { menuApi }    from './api/menu'
 export { tableApi }   from './api/table'
 export { authApi }    from './api/auth'
 
+// Plugins
+export { confirmPlugin } from './plugins/confirm/index'
+export { notifPlugin }   from './plugins/notif/index'
+
+// Composables
+export { useConfirm }    from './composables/useAppUtils'
+export { useNotif }      from './composables/useAppUtils'
+
+// ... rest of your exports
 // Utils
 export { formatCurrency, formatCurrencyNoSymbol,formatKHR }       from './utils/currency'
 export {
