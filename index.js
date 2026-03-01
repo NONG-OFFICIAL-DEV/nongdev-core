@@ -4,14 +4,14 @@ export { tableApi }   from './api/table'
 export { authApi }    from './api/auth'
 
 // state
-export { confirmState, alertState } from './state.js'
+export { confirmState, alertState } from './state'
 
 // plugins
-export { confirmPlugin } from './plugins/confirm/index.js'
-export { notifPlugin }   from './plugins/notif/index.js'
+export { confirmPlugin } from './plugins/confirm/index'
+export { notifPlugin }   from './plugins/notif/index'
 
 // composables
-export { useConfirm, useNotif } from './composables/useAppUtils.js'
+export { useConfirm, useNotif } from './composables/useAppUtils'
 
 // ... rest of your exports
 // Utils

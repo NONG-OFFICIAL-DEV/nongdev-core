@@ -1,4 +1,4 @@
-import { confirmState } from "../../state.js";
+import { confirmState } from "../../state";
 export { confirmState };
 
 export const confirmPlugin = {

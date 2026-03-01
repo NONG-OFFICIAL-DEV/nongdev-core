@@ -1,4 +1,4 @@
-import { alertState } from "../../state.js";
+import { alertState } from "../../state";
 export { alertState };
 
 export const notifPlugin = {
