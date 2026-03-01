@@ -2,7 +2,7 @@ import ConfirmDialog from './components/ConfirmDialog.vue'
 import NotificationAlert from './components/NotificationAlert.vue'
 import { reactive } from 'vue'
 
-export default {
+const CorePlugin = {
   install(app) {
     const state = reactive({
       confirmRef: null,
@@ -23,3 +23,5 @@ export default {
     app.provide('coreState', state)
   }
 }
+
+export default CorePlugin
