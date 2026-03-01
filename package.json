@@ -3,16 +3,13 @@
   "version": "1.2.6",
   "description": "Shared utilities, API services and helpers",
   "private": false,
-  "main": "index.js",
+  "main": "src/plugin.js",
   "files": [
     "api",
     "utils",
     "echo.js",
     "http.js",
-    "index.js",
-    "plugins",
-    "composables",
-    "state.js"
+    "index.js"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
