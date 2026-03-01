@@ -26,9 +26,9 @@
     "shared"
   ],
   "peerDependencies": {
-    "axios": "^1.0.0",
-    "laravel-echo": "^1.0.0",
-    "pusher-js": "^8.0.0"
+    "axios": "^1.13.5",
+    "laravel-echo": "^2.3.0",
+    "pusher-js": "^8.4.0"
   },
   "author": "nong-official-dev",
   "license": "ISC"

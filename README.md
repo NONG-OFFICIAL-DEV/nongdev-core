@@ -132,3 +132,10 @@ nong-official-dev-core/
 ## License
 
 ISC
+
+## step to release new version
+git add .
+git commit -m "add confirm and notif plugins"
+npm version minor
+npm publish
+git push
