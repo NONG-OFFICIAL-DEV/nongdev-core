@@ -3,7 +3,7 @@ export { menuApi } from "./api/menu";
 export { tableApi } from "./api/table";
 export { authApi } from "./api/auth";
 
-export { CorePlugin } from "./plugin";
+export { default as CorePlugin } from './plugin.js'
 
 // Utils
 export {
@@ -29,3 +29,5 @@ export {
 
 // Echo
 export { useEcho, createEcho } from "../echo";
+// Composables
+export { useAppUtils } from './composables/useAppUtils.js'
