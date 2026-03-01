@@ -11,7 +11,8 @@
     "http.js",
     "index.js",
     "plugins",
-    "composables"
+    "composables",
+    "state.js"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
