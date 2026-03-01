@@ -1,11 +1,11 @@
 <template>
-  <v-dialog v-model="dialog" :max-width="options.width" @keydown.esc="cancel">
-    <v-card :width="options.width" rounded="lg">
-      <v-card-title :class="`bg-${options.type}`">
-        <strong>{{ title }}</strong>
+  <v-dialog v-model="state.dialog" :max-width="state.options.width" @keydown.esc="cancel">
+    <v-card :width="state.options.width" rounded="lg">
+      <v-card-title :class="`bg-${state.options.type}`">
+        <strong>{{ state.title }}</strong>
       </v-card-title>
-      <v-card-text v-show="!!message" class="capitalize-first-letter pt-6 pb-4">
-        <span v-html="message"></span>
+      <v-card-text v-show="!!state.message" class="capitalize-first-letter pt-6 pb-4">
+        <span v-html="state.message"></span>
         <div class="text-caption text-medium-emphasis mt-2">
           This action cannot be undone.
         </div>
@@ -25,22 +25,12 @@
 </template>
 
 <script>
-import { inject } from 'vue'
+import { confirmState } from './index.js'
 
 export default {
   name: 'ConfirmDialog',
   setup() {
-    const state = inject('confirmState')
-    return { state }
-  },
-  computed: {
-    dialog: {
-      get() { return this.state.dialog },
-      set(val) { this.state.dialog = val }
-    },
-    title()   { return this.state.title },
-    message() { return this.state.message },
-    options() { return this.state.options },
+    return { state: confirmState }
   },
   methods: {
     async agree() {

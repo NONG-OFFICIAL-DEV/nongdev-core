@@ -2,13 +2,12 @@
   <div class="alert">
     <v-slide-x-reverse-transition group>
       <v-alert
-        v-for="alert in alerts"
+        v-for="alert in state.alerts"
         :key="alert.id"
         :type="alert.type"
         :icon="alert.icon"
         :dense="alert.dense"
         :prominent="alert.prominent"
-        :dismissible="alert.dismissible"
         closable
         @click:close="closeAlert(alert.id)"
       >
@@ -19,16 +18,17 @@
 </template>
 
 <script>
-import { inject } from 'vue'
+import { alertState } from "./index.js";
 
 export default {
-  name: 'NotificationAlert',
+  name: "NotificationAlert",
   setup() {
-    const alerts     = inject('alerts')
-    const closeAlert = inject('closeAlert')
-    return { alerts, closeAlert }
-  }
-}
+    const closeAlert = (id) => {
+      alertState.alerts = alertState.alerts.filter((a) => a.id !== id);
+    };
+    return { state: alertState, closeAlert };
+  },
+};
 </script>
 
 <style scoped>

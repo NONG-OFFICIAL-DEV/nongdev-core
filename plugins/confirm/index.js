@@ -1,27 +1,36 @@
-import { createApp, defineAsyncComponent, ref, reactive } from 'vue'
+import { reactive } from "vue";
+
+// Shared state outside of plugin — accessible by both component and composable
+export const confirmState = reactive({
+  dialog: false,
+  title: null,
+  message: null,
+  options: { type: "error", width: 290 },
+  agreeCallback: () => {},
+  cancelCallback: () => {},
+});
 
 export const confirmPlugin = {
   install(app) {
-    const state = reactive({
-      dialog: false,
-      title: null,
-      message: null,
-      options: { type: 'error', width: 290 },
-      agreeCallback: () => {},
-      cancelCallback: () => {},
-    })
+    const confirm = ({
+      title,
+      message,
+      options = {},
+      agree = () => {},
+      cancel = () => {},
+    }) => {
+      confirmState.dialog = true;
+      confirmState.title = title;
+      confirmState.message = message;
+      confirmState.options = Object.assign(
+        { type: "error", width: 290 },
+        options,
+      );
+      confirmState.agreeCallback = agree;
+      confirmState.cancelCallback = cancel;
+    };
 
-    const confirm = ({ title, message, options = {}, agree = () => {}, cancel = () => {} }) => {
-      state.dialog    = true
-      state.title     = title
-      state.message   = message
-      state.options   = Object.assign({ type: 'error', width: 290 }, options)
-      state.agreeCallback  = agree
-      state.cancelCallback = cancel
-    }
-
-    // Make available globally
-    app.config.globalProperties.$confirm = confirm
-    app.provide('confirm', confirm)
-  }
-}
+    app.provide("confirm", confirm);
+    app.config.globalProperties.$confirm = confirm;
+  },
+};
