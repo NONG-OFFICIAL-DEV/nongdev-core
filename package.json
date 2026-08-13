@@ -1,6 +1,6 @@
 {
   "name": "@nong-official-dev/core",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Shared Vue components, utilities, API services and helpers",
   "private": false,
   "main": "src/index.js",
@@ -35,10 +35,18 @@
     "@vueuse/core": "^14.0.0"
   },
   "peerDependenciesMeta": {
-    "vee-validate": { "optional": true },
-    "yup": { "optional": true },
-    "date-fns": { "optional": true },
-    "@vueuse/core": { "optional": true }
+    "vee-validate": {
+      "optional": true
+    },
+    "yup": {
+      "optional": true
+    },
+    "date-fns": {
+      "optional": true
+    },
+    "@vueuse/core": {
+      "optional": true
+    }
   },
   "author": "nong-official-dev",
   "license": "ISC"
