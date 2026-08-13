@@ -3,16 +3,20 @@
 > Shared Vue components, utilities, API services, WebSocket helpers and constants — reusable across any project.
 
 [![npm](https://img.shields.io/badge/npm-@nong-official-dev%2Fcore-blue)](https://github.com/nong-official-dev/nong-official-dev-core)
-[![version](https://img.shields.io/badge/version-2.0.0-green)](https://github.com/nong-official-dev/nong-official-dev-core)
+[![version](https://img.shields.io/badge/version-3.1.0-green)](https://github.com/nong-official-dev/nong-official-dev-core)
 [![license](https://img.shields.io/badge/license-ISC-lightgrey)](LICENSE)
 
 ---
 
-## ⚠️ v2.0.0 — breaking change + a known pre-existing bug
+## v3.1.0 — `$confirm` is back, and two long-standing import bugs are fixed
 
-**Breaking:** `ConfirmDialog` dropped its imperative `$confirm({...})` singleton API in favor of a plain `v-model` + props/emits component (see [Components](#components) below). If `pos`, `kitchen`, or `admin` call `this.$confirm(...)` anywhere, that call becomes a no-op after upgrading — those call sites need to switch to `<CoreConfirmDialog v-model="..." @confirm="..." />` before bumping this dependency. `$notif(...)` is unaffected.
+**`$confirm({...})` restored (additive, not a revert):** v2.0.0 dropped the old imperative `$confirm({...})` singleton in favor of a plain `v-model` + props/emits `ConfirmDialog` (see [Components](#components)). That broke every existing `$confirm(...)`/`.confirm(...)` call site with no migration path. v3.1.0 restores it as a bridge, same pattern `$notif`/`notifRef` already uses: `ConfirmDialog` self-registers into `coreState.confirmRef` on mount, and `CorePlugin` wires `$confirm(options)` → `confirmRef.open(options)`. **Both APIs work at the same time** — existing `$confirm({ title, message, options: { type }, agree, cancel })` call sites keep working unchanged, and new code can still use `<CoreConfirmDialog v-model="..." @confirm="..." />`. A consumer with its own richer imperative dialog can register that component into the same `confirmRef` slot instead of using this package's `ConfirmDialog` — see [`useConfirmDiscard()`](#useconfirmdiscard) and the Components table below.
 
-**Pre-existing bug, not introduced by this update:** `index.js` exports `menuApi`/`tableApi`/`authApi` from `./api/menu`, `./api/table`, `./api/auth` — none of those files exist in `src/`. Any `import` from this package currently throws a module-not-found error before reaching *any* export, including the new components below, until `src/api/*` is added (or those three lines are removed). Flagging this now since it blocks adopting anything in this release.
+**Fixed — previously blocked every import from this package entirely:**
+- `index.js` exported `menuApi`/`tableApi`/`authApi` from `./api/menu`, `./api/table`, `./api/auth` — none of those files ever existed in `src/`. Removed (nothing in this package used them).
+- `index.js` imported `useEcho`/`createEcho` from `"../echo"` — wrong relative path (resolves one level above `src/`, where no `echo.js` exists). Fixed to `"./echo"`, the real location.
+
+Both bugs meant **any `import` from this package threw a module-not-found error before reaching any export at all** — every component/util documented below was unusable until now, regardless of version. If you tried adopting anything from v2.0.0 or v3.0.0 and it didn't even resolve, this was why.
 
 ---
 
@@ -50,7 +54,7 @@ import { AppTable, AppDialog, AppForm } from '@nong-official-dev/core'
 | `AppToolbar` | Page header: title/subtitle + `#actions` slot | — |
 | `EmptyState` | Icon + title/description placeholder for empty lists | — |
 | `LoadingOverlay` | Full-screen `v-overlay` + spinner | — |
-| `ConfirmDialog` | Confirm dialog. `v-model` + props (`title`, `message`, `color`, `loading`, `confirmText`, `cancelText`) + `@confirm`/`@cancel`. Also globally registered as `CoreConfirmDialog` by `CorePlugin`. **v2 API — see breaking change above.** | — |
+| `ConfirmDialog` | Confirm dialog. `v-model` + props (`title`, `message`, `color`, `loading`, `confirmText`, `cancelText`) + `@confirm`/`@cancel`. Also globally registered as `CoreConfirmDialog` by `CorePlugin`. Also usable imperatively via `$confirm({ title, message, options: { type }, agree, cancel })` (v3.1+, bridge restored — see above); both APIs work on the same mounted instance. | — |
 | `NotificationAlert` | Stacked toast alerts. Mount once, then call the global `$notif(message, { type, timeout })` (installed by `CorePlugin`) from anywhere. | — |
 | `AppNotificationBell` | Bell icon + unread badge + dropdown list + mark-read/mark-all-read + "view all". Fetching, icon/color/message resolution, and navigation are all injected via props/emits — no assumed API shape or router. | — |
 
@@ -253,15 +257,14 @@ nong-official-dev-core/
     useAppUtils.js
     useConfirmDiscard.js
     useDateFnsLocale.js
-  api/
   utils/
     currency.js    ← formatCurrency, formatNumber
     date.js        ← formatTimeAgo, formatTime, formatDate
     apiMessages.js ← translateApiMessage
     khmerDateAdapter.js ← KhmerDateAdapter (Vuetify date.adapter)
-  echo.js          ← useEcho() singleton
+  echo.js          ← useEcho()/createEcho() singleton
   http.js          ← axios instance with interceptors
-  plugin.js        ← CorePlugin (registers CoreConfirmDialog/CoreNotificationAlert + $notif)
+  plugin.js        ← CorePlugin (registers CoreConfirmDialog/CoreNotificationAlert + $notif/$confirm)
   index.js         ← all exports
   package.json
   .npmrc
