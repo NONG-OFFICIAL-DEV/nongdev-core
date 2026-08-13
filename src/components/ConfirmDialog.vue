@@ -1,66 +1,60 @@
+<script setup>
+/*
+ * v2: switched from the old imperative `$confirm({...})` singleton API to
+ * a plain v-model + props/emits component — no global mutable state, no
+ * hidden root-mounted instance to remember to keep alive. Use it like any
+ * other Vuetify dialog:
+ *
+ *   <CoreConfirmDialog v-model="show" :loading="deleting" @confirm="doDelete" />
+ *
+ * (still globally registered as `CoreConfirmDialog` by CorePlugin, but no
+ * longer requires installing the plugin at all if you just import it
+ * directly instead).
+ */
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
+const props = defineProps({
+  modelValue: { type: Boolean, default: false },
+  title: { type: String, default: null },
+  message: { type: String, default: null },
+  loading: { type: Boolean, default: false },
+  color: { type: String, default: 'error' },
+  confirmText: { type: String, default: null },
+  cancelText: { type: String, default: null },
+})
+
+const emit = defineEmits(['update:modelValue', 'confirm', 'cancel'])
+
+// Falls back to the consumer's `common.*` i18n keys if defined (see this
+// project's usage), otherwise a plain English default.
+const resolvedTitle = computed(() => props.title ?? t('common.confirm', 'Confirm'))
+const resolvedMessage = computed(() => props.message ?? t('common.confirmMessage', 'Are you sure?'))
+const resolvedConfirmText = computed(() => props.confirmText ?? t('common.confirm', 'Confirm'))
+const resolvedCancelText = computed(() => props.cancelText ?? t('common.cancel', 'Cancel'))
+
+function cancel() {
+  emit('cancel')
+  emit('update:modelValue', false)
+}
+</script>
+
 <template>
-  <v-dialog v-model="dialog" :max-width="options.width" @keydown.esc="cancel">
-    <v-card :width="options.width" rounded="lg">
-      <v-card-title :class="`bg-${options.type}`">
-        <strong>{{ title }}</strong>
-      </v-card-title>
-      <v-card-text v-show="!!message" class="capitalize-first-letter pt-6 pb-4">
-        <span v-html="message"></span>
-        <div class="text-caption text-medium-emphasis mt-2">
-          This action cannot be undone.
-        </div>
-      </v-card-text>
-      <v-divider />
-      <v-card-actions class="pa-4">
-        <v-btn elevation="0" ref="btnNo" @click="cancel" variant="tonal">
-          {{ $t('btn.cancel') }}
-        </v-btn>
+  <v-dialog :model-value="modelValue" max-width="420" @update:model-value="emit('update:modelValue', $event)">
+    <v-card>
+      <v-card-title class="text-h6">{{ resolvedTitle }}</v-card-title>
+      <v-card-text>{{ resolvedMessage }}</v-card-text>
+      <v-card-actions>
         <v-spacer />
-        <v-btn elevation="0" class="bg-error" @click="agree">
-          {{ $t('btn.yes') }}
+        <v-btn variant="text" :disabled="loading" @click="cancel">
+          {{ resolvedCancelText }}
+        </v-btn>
+        <v-btn :color="color" variant="flat" :loading="loading" @click="emit('confirm')">
+          {{ resolvedConfirmText }}
         </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
-
-<script setup>
-import { ref, inject, onMounted } from 'vue'
-
-const dialog = ref(false)
-const title = ref(null)
-const message = ref(null)
-
-const options = ref({
-  type: 'error',
-  width: 290
-})
-
-let agreeCallback = () => {}
-let cancelCallback = () => {}
-
-function open({ title: t, message: m, options: o, agree, cancel }) {
-  dialog.value = true
-  title.value = t
-  message.value = m
-  options.value = { ...options.value, ...o }
-  agreeCallback = agree || (() => {})
-  cancelCallback = cancel || (() => {})
-}
-
-function agree() {
-  agreeCallback()
-  dialog.value = false
-}
-
-function cancel() {
-  cancelCallback()
-  dialog.value = false
-}
-
-const state = inject('coreState')
-
-onMounted(() => {
-  state.confirmRef = { open }
-})
-</script>
