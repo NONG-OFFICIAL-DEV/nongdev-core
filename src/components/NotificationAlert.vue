@@ -47,7 +47,6 @@ defineExpose({ newAlert, closeAlert })
         v-for="alert in alerts"
         :key="alert.id"
         :type="alert.type"
-        variant="tonal"
         density="comfortable"
         closable
         class="mb-2"
