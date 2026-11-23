@@ -23,16 +23,16 @@
     "components"
   ],
   "peerDependencies": {
-    "vue": "^3.5.0",
-    "vuetify": "^3.0.0",
-    "vue-i18n": "^11.0.0",
+    "@vueuse/core": "^14.0.0 || ^15.0.0",
     "axios": "^1.13.5",
+    "date-fns": "^4.0.0",
     "laravel-echo": "^2.3.0",
     "pusher-js": "^8.4.0",
     "vee-validate": "^4.0.0",
-    "yup": "^1.0.0",
-    "date-fns": "^4.0.0",
-    "@vueuse/core": "^14.0.0"
+    "vue": "^3.5.46",
+    "vue-i18n": "^11.0.0",
+    "vuetify": "^3.0.0 || ^4.0.0",
+    "yup": "^1.0.0"
   },
   "peerDependenciesMeta": {
     "vee-validate": {
@@ -49,5 +49,9 @@
     }
   },
   "author": "nong-official-dev",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@vueuse/core": "^15.1.0",
+    "vuetify": "^4.3.4"
+  }
 }

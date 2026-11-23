@@ -293,7 +293,7 @@ ISC
 
 ## step to release new version
 git add .
-git commit -m "add confirm and notif plugins"
+git commit -m "version update"
 npm version minor
 npm publish
 git push
