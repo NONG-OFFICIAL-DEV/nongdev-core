@@ -18,6 +18,7 @@ function newAlert(message, options = {}) {
     id,
     type: options.type || 'success',
     message,
+    width: options.width || 360,
   })
 
   if (options.timeout !== 0) {
@@ -47,6 +48,7 @@ defineExpose({ newAlert, closeAlert })
         v-for="alert in alerts"
         :key="alert.id"
         :type="alert.type"
+        :width="alert.width"
         density="comfortable"
         closable
         class="mb-2"
@@ -64,6 +66,7 @@ defineExpose({ newAlert, closeAlert })
   top: 80px;
   right: 16px;
   z-index: 9999;
-  max-width: 360px;
+  width: 360px;
+  max-width: calc(100vw - 32px);
 }
 </style>
