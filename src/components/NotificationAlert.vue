@@ -49,6 +49,7 @@ defineExpose({ newAlert, closeAlert })
         :key="alert.id"
         :type="alert.type"
         :width="alert.width"
+        max-width="100%"
         density="comfortable"
         closable
         class="mb-2"
@@ -66,7 +67,9 @@ defineExpose({ newAlert, closeAlert })
   top: 80px;
   right: 16px;
   z-index: 9999;
-  width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;   /* grow leftward from the right edge */
   max-width: calc(100vw - 32px);
 }
 </style>
